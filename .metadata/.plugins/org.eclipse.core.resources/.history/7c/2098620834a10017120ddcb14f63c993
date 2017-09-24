@@ -1,0 +1,76 @@
+package tests;
+import models.Vec3;
+
+public class Vec3Test {
+	public void sumTest() {
+		Vec3 v1 = new Vec3(2,2,2);
+		Vec3 v2 = new Vec3(2,2,2);
+		Vec3 result = new Vec3(4,4,4);
+		
+		assert v1.sum(v2) == result;
+	}
+	
+	public void multiplyByVecTest() {
+		Vec3 v1 = new Vec3(1,2,3);
+		Vec3 v2 = new Vec3(1,2,3);
+		Vec3 result = new Vec3(6,12,18);
+		
+		assert v1.multiplyByVec(v2) == result;
+	}
+	
+	public void multiplyByNumberTest() {
+		Vec3 v1 = new Vec3(2,2,2);
+		double number = 4;
+		Vec3 result = new Vec3(8,8,8);
+		
+		assert v1.multiplyByNumber(number) == result;
+		
+	}
+	
+	public void divideTest() {
+		Vec3 v1 = new Vec3(4,-2,3.5);
+		Vec3 v2 = new Vec3(2,0.5,-2);
+		Vec3 result = new Vec3(2,-4,-1.75);
+		
+		assert v1.divide(v2) == result;
+	}
+	
+	public void normeTest() {
+		Vec3 v1 = new Vec3(2,2,2);
+		double result = Math.sqrt(12);
+		
+		assert v1.norme() == result;
+	}
+	
+	public void squareNormeTest() {
+		Vec3 v1 = new Vec3(2,2,2);
+		double result = 144;
+		
+		assert v1.squareNorme() == result;
+	}
+	
+	public void normalizedTest() {
+
+		Vec3 v1 = new Vec3(4,4,4);
+		Vec3 result = new Vec3(2,2,2);
+		
+		assert v1.normalized(2) == result;
+	}
+	
+	public void scalarProductTest() {
+		Vec3 v1 = new Vec3(2,2,2);
+		Vec3 v2 = new Vec3(3,3,3);
+		double result = 18;
+		
+		assert v1.scalarProduct(v2) == result;
+	}
+	
+	public void productVectorTest() {
+		Vec3 v1 = new Vec3(10,10,10);
+		Vec3 v2 = new Vec3(2,2,2);
+		Vec3 result = new Vec3(0,0,0);
+		
+		assert v1.vectorProduct(v2) == result;
+	}
+
+}

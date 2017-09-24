@@ -1,0 +1,90 @@
+package tests;
+import models.Vec3;
+
+public class Vec3Test {
+	public void sumTest() {
+		Vec3 v1 = new Vec3(2,2,2);
+		Vec3 v2 = new Vec3(2,2,2);
+		Vec3 result = new Vec3(4,4,4);
+		
+		assert v1.sum(v2) == result;
+	}
+	
+	public void multiplyByVecTest() {
+		Vec3 v1 = new Vec3(1,2,3);
+		Vec3 v2 = new Vec3(1,2,3);
+		Vec3 result = new Vec3(6,12,18);
+		
+		assert v1.multiplyByVec(v2) == result;
+	}
+	
+	public void multiplyByNumberTest() {
+		Vec3 v1 = new Vec3(2,2,2);
+		double number = 4;
+		Vec3 result = new Vec3(8,8,8);
+		
+		if(!(v1.multiplyByNumber(number) == result)) {
+			System.out.println("multiplyByNumber fail");
+		}
+		
+	}
+	
+	public void divideTest() {
+		Vec3 v1 = new Vec3(4,-2,3.5);
+		Vec3 v2 = new Vec3(2,0.5,-2);
+		Vec3 result = new Vec3(2,-4,-1.75);
+		
+		if(!(v1.divide(v2) == result)){
+			System.out.println("divide fail");
+		}
+	}
+	
+	public void normeTest() {
+		Vec3 v1 = new Vec3(2,2,2);
+		double result = Math.sqrt(12);
+		
+		if(!(v1.norme() == result)) {
+			System.out.println("norme fail");
+		};
+	}
+	
+	public void squareNormeTest() {
+		Vec3 v1 = new Vec3(2,2,2);
+		double result = 144;
+		
+		if(!(v1.squareNorme() == result)){
+			System.out.println("squareNorme fail");
+		}
+	}
+	
+	public void normalizedTest() {
+
+		Vec3 v1 = new Vec3(4,4,4);
+		Vec3 result = new Vec3(2,2,2);
+		
+		if(!(v1.normalized(2) == result)) {
+			System.out.println("normalized fail");
+		}
+	}
+	
+	public void scalarProductTest() {
+		Vec3 v1 = new Vec3(2,2,2);
+		Vec3 v2 = new Vec3(3,3,3);
+		double result = 18;
+		
+		if(!(v1.scalarProduct(v2) == result)) {
+			System.out.println("scalarProduct fail");
+		}
+	}
+	
+	public void productVectorTest() {
+		Vec3 v1 = new Vec3(10,10,10);
+		Vec3 v2 = new Vec3(2,2,2);
+		Vec3 result = new Vec3(0,0,0);
+		
+		if(!(v1.vectorProduct(v2) == result)) {
+			System.out.println("vectorProduct fail");
+		};
+	}
+
+}

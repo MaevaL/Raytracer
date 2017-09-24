@@ -1,0 +1,20 @@
+package models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Scene {
+
+	private List<Sphere> spheres = new ArrayList<Sphere>();
+	
+	public Scene() {}
+	
+	public void addSphere() {
+		
+	}
+	
+	public List<Vec3> getSphere() {
+	}
+	
+	
+}

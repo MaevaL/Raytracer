@@ -1,0 +1,30 @@
+package utils;
+
+import tests.RayTest;
+import tests.UtilsTest;
+import tests.Vec3Test;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Vec3Test vec = new Vec3Test();
+		vec.sumTest();
+		vec.multiplyByVecTest();
+		vec.multiplyByNumberTest();
+		vec.normeTest();
+		vec.squareNormeTest();
+		vec.normalizedTest();
+		vec.scalarProductTest();
+		vec.productVectorTest();
+		
+		UtilsTest utils = new UtilsTest();
+		utils.clampTest();
+		
+		RayTest ray = new RayTest();
+		ray.position3DTest();
+		
+		System.out.println("test done");
+
+	}
+
+}

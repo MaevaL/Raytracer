@@ -1,0 +1,11 @@
+package tests;
+
+public class TracingUtilsTest {
+	
+	public void intersecTest() {
+		Vec3 origin = new Vec3(0,0,0);
+		Vec3 color = new Vec3(0,0,0);
+		Sphere sphere = new Sphere();
+	}
+
+}

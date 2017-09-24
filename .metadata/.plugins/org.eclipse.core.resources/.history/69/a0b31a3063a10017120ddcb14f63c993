@@ -1,0 +1,6 @@
+package models;
+
+public class Intersection {
+	private Vec3 intersecPoint = new Vec3(0,0,0);
+	private Double distanceT = 0.0;  
+}

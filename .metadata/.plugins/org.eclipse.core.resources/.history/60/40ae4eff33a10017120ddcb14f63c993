@@ -1,0 +1,20 @@
+package utils;
+
+import tests.Vec3Test;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Vec3Test test = new Vec3Test();
+		test.sumTest();
+		test.multiplyByVecTest();
+		test.multiplyByNumberTest();
+		test.normeTest();
+		test.squareNormeTest();
+		test.normalizedTest();
+		test.scalarProductTest();
+		test.productVectorTest();
+
+	}
+
+}

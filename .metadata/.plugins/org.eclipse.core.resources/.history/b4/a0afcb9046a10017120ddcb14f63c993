@@ -1,0 +1,50 @@
+package tests;
+
+import models.Ray;
+import models.Sphere;
+import models.Vec3;
+import utils.TracingUtils;
+
+public class TracingUtilsTest {
+	
+	public void intersecTest() {
+		Vec3 origin = new Vec3(0,0,0);
+		Vec3 direction = new Vec3(1,0,0);
+		
+		Ray r = new Ray(origin, direction);
+		
+		Vec3 color = new Vec3(0,0,0);
+		Sphere s1 = new Sphere(origin, color, 1, false);
+		
+		Double inter = 0.0;
+		TracingUtils tracing = new TracingUtils();
+		inter = tracing.intersec(r, s1);
+		double result = 1;
+		
+		if(inter != result) {
+			System.out.println("Bad Itersection");
+		}
+		
+		Vec3 originSphere = new Vec3(-1,0,0);
+		Sphere s2 = new Sphere(originSphere, color, 1, false);
+		Double inter2 = tracing.intersec(r, s2);
+		
+		if(inter2 != null) {
+			System.out.println("Bad Intersection : must be null");
+		}
+		
+		originSphere.setCoordinate(2, 0, 0);
+		Sphere s3 = new Sphere(origin, color, 1, false);
+		inter = tracing.intersec(r, s3);
+		result = 1;
+		
+		if(inter != 1) {
+			System.out.println("Bad Intersection");
+		}
+		
+		
+		
+		
+	}
+
+}

@@ -1,0 +1,53 @@
+package utils;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Vector;
+
+import models.Vec3;
+
+public class Utils {
+	
+	public double clamp(double value) {	
+		double min = 0;
+		double max = 255;
+
+		if (value < 0) return min;
+		if (value > 255) return max;
+		return value;
+	}
+	
+	public void save_img(Vector<Vec3> img, double width, double height, String nameSavedFile) {
+		 BufferedWriter bw = null;
+	        FileWriter fw = null;
+	 
+	        try {
+	            fw = new FileWriter(nameSavedFile);
+	            bw = new BufferedWriter(fw);
+	 
+	            //write header
+	            bw.write("P3" + " \n");
+	            bw.write(width + " " + height + " \n");
+	            bw.write(255 + " \n");
+	 
+	            //write content
+	            for (int i = 0; i < height; i++) {
+	                for (int j = 0; j < width; j++) {
+	                    bw.write(clamp(img.get(i).getX()) + " " + clamp(img.get(i).getY())+ " " + clamp(img.get(i).getZ())+ " \n");
+	                }
+	            }
+	           
+	            //close file
+	            if (bw != null)
+	                bw.close();	 
+	            if (fw != null)
+	                fw.close();
+	 
+	        } catch (IOException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+	}
+
+}
