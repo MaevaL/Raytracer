@@ -1,12 +1,9 @@
 package tests;
-import models.Ray;
-import models.Vec3;
 import utils.Utils;
 
 public class UtilsTest {
 	
-	public void clampTest() {
-		Utils utils = new Utils();
+	public static void clampTest() {
 		double val1 = -1;
 		double val2 = 125;
 		double val3 = 256;
@@ -15,18 +12,22 @@ public class UtilsTest {
 		double r2 = 125;
 		double r3 = 255;
 		
-		if(utils.clamp(val1) != 0) {
+		if(Utils.clamp(val1) != r1) {
 			System.out.println("clamp doit renvoyer la valeur min");
 		}
-		if(utils.clamp(val2) != r2) {
+		if(Utils.clamp(val2) != r2) {
 			System.out.println("clamp doit renvoyer la valeur");
 		}
-		if(utils.clamp(val3) != r3) {
+		if(Utils.clamp(val3) != r3) {
 			System.out.println("clamp doit renvoyer le max");
 		}
 	}
 	
 	public void img_savedTest() {}
 	
+	public static void main(String[] args) {
+		UtilsTest.clampTest();
+		
+	}
 
 }

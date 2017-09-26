@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Intersection;
+import models.Light;
 import models.Ray;
 import models.Scene;
 import models.Sphere;
@@ -53,8 +54,11 @@ public class TracingUtils {
 				direction.setX((double)j - ((double)width / 2.0));
 				direction.setY((double)i - ((double)height / 2.0));
 				direction.setZ(-((double)width / (2.0 * Math.tan(fov / 2.0))));
+				
 				Ray r = new Ray(origin, direction);
+				
 				color = castRay(r, scene); 
+				
 				if(color == null){
 					Vec3 pixel = new Vec3(0,0,0);
 					pixels.set((i*width) + j, pixel);
@@ -76,7 +80,7 @@ public class TracingUtils {
 		}
 		
 		if(!inter.getSphere().getIs_mirror()) {
-			return inter.getSphere().getColor();
+			return inter.getSphere().getColor().divide(new Vec3(255,255,255)).multiplyByNumber(illuminationAll(r, inter, scene.getLights()));
 		}
 		else {
 			Ray reflectedRay = relfection(r, inter);
@@ -91,13 +95,32 @@ public class TracingUtils {
 	}
 	
 	public static Ray relfection(Ray r, Intersection inter) {
-		Vec3 n = inter.getIntersecPoint().substract(inter.getSphere().getOrigin()).normalized();
-		Vec3 reflectedRayDirection = n.multiplyByNumber(n.scalarProduct(r.getDirection())).multiplyByNumber(-2).sum(r.getDirection()) ;
+		
+		Vec3 reflectedRayDirection = inter.getNormale().multiplyByNumber(inter.getNormale().scalarProduct(r.getDirection())).multiplyByNumber(-2).sum(r.getDirection());
 		
 		Ray newRay = new Ray(inter.getIntersecPoint().substract(r.getDirection().multiplyByNumber(0.001)), reflectedRayDirection);
 		return newRay;
 	}
 	
+	public static double illuminationAll(Ray r, Intersection inter, List<Light> lights) {
+		double sumlight = 0;
+		for (Light light : lights) {
+			sumlight += illumination(r, inter, light);
+		}
+		return sumlight;
+	}
+
+	private static double illumination(Ray r, Intersection inter, Light light) {
+		double intensity = light.getIntensity();
+		
+		Vec3 n = (light.getPosition().substract(inter.getIntersecPoint())).normalized();
+		Vec3 dirLight = n.multiplyByNumber(n.scalarProduct(r.getDirection())).multiplyByNumber(-2).sum(r.getDirection()).normalized();
+		double distLightInter = light.getPosition().substract(inter.getIntersecPoint()).norme();
+		
+		double illumination = (intensity * n.scalarProduct(dirLight)) / (distLightInter * distLightInter) ;
+		
+		return illumination;
+	}
 	
 	public static Intersection intersecScene(Scene scene, Ray r){
 		Double inter = 0.0;
@@ -117,10 +140,11 @@ public class TracingUtils {
 			}
 		}
 		if(distanceMin != null) {
-			return new Intersection(r.position3D(distanceMin), distanceMin, sphs);
+			
+			Vec3 normale =r.position3D(distanceMin).substract(sphs.getOrigin()).normalized(); 
+			
+			return new Intersection(r.position3D(distanceMin), distanceMin,sphs,normale);
 		}
 		return null;
-	}
-	
-	
+	}	
 }

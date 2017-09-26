@@ -1,0 +1,18 @@
+package tests;
+
+import models.Ray;
+import models.Vec3;
+
+public class RayTest {
+
+	public void position3DTest() {
+		Vec3 origin = new Vec3(0,0,0);
+		Vec3 direction = new Vec3(1,0,0);
+		Vec3 result = new Vec3(2,0,0);
+		
+		Ray r = new Ray(origin, direction);
+		if(!r.position3D(2).equals(result)) {
+			System.out.println("position3D renvoit la mauvaise position");
+		}	
+	}
+}

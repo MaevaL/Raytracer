@@ -1,0 +1,24 @@
+package models;
+
+public class Light {
+	double position;
+	double power;
+
+	public Light(double position, double power) {
+		this.position = position;
+		this.power = power;
+	}
+
+	public double getPosition() {
+		return position;
+	}
+	public void setPosition(double position) {
+		this.position = position;
+	}
+	public double getPower() {
+		return power;
+	}
+	public void setPower(double power) {
+		this.power = power;
+	}
+}

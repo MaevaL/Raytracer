@@ -23,7 +23,7 @@ public class Utils {
 		FileWriter fw = null;
 
 		try {
-			fw = new FileWriter("C:\\Users\\Maëva Lauzier\\Desktop\\Raytracer\\Raytracer\\img\\"+ nameSavedFile);
+			fw = new FileWriter("img\\"+ nameSavedFile);
 			bw = new BufferedWriter(fw);
 
 			//write header

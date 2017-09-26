@@ -1,0 +1,32 @@
+package models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Scene {
+
+	private List<Sphere> spheres = new ArrayList<Sphere>();
+	private List<Light> lights = new ArrayList<Light>();
+	
+	public Scene() {}
+	
+	public List<Light> getLights() {
+		return lights;
+	}
+
+	public void addLight(Light light) {
+		lights.add(light);
+	}
+	
+	public void addSphere(Sphere sphere) {
+		spheres.add(sphere);
+	}
+	
+	public List<Sphere> getSpheres() {
+		return spheres;
+	}	
+	
+	public double illumination(int index, Vec3 normale, Vec3 lightDirection, double distLightIntersec) {
+		return (normale.scalarProduct(lightDirection) * lights.get(index).getPower()) / (distLightIntersec*distLightIntersec);
+	}
+}

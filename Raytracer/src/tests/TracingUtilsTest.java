@@ -19,8 +19,7 @@ public class TracingUtilsTest {
 		Sphere s1 = new Sphere(origin, color, 1, false);
 		
 		Double inter = 0.0;
-		TracingUtils tracing = new TracingUtils();
-		inter = tracing.intersec(r, s1);
+		inter = TracingUtils.intersec(r, s1);
 		double result = 1;
 		
 		if(inter != result) {
@@ -29,7 +28,7 @@ public class TracingUtilsTest {
 		
 		Vec3 originSphere = new Vec3(-2,0,0);
 		Sphere s2 = new Sphere(originSphere, color, 1, false);
-		inter = tracing.intersec(r, s2);
+		inter = TracingUtils.intersec(r, s2);
 		
 		if(inter != null) {
 			System.out.println("Bad Intersection : must be null");
@@ -37,7 +36,7 @@ public class TracingUtilsTest {
 		
 		originSphere.setCoordinate(2, 0, 0);
 		Sphere s3 = new Sphere(origin, color, 1, false);
-		inter = tracing.intersec(r, s3);
+		inter = TracingUtils.intersec(r, s3);
 		result = 1;
 		
 		if(inter != 1) {

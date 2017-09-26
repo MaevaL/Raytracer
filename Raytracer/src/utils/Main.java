@@ -3,10 +3,12 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Light;
 import models.Scene;
 import models.Sphere;
 import models.Vec3;
 import tests.RayTest;
+import tests.TracingUtilsTest;
 import tests.UtilsTest;
 import tests.Vec3Test;
 
@@ -39,10 +41,14 @@ public class Main {
 		Sphere s2 = new Sphere(v2, c2, r2, false); // sol
 		Sphere s3 = new Sphere(v3, c3, r3, false); // plafond
 		Sphere s4 = new Sphere(v4, c4, r4, false); // mur gauche 
-		Sphere s5 = new Sphere(v5, c5, r5, true); // mur droit
-		Sphere s6 = new Sphere(v6, c6, r6, true); // mur du fond
+		Sphere s5 = new Sphere(v5, c5, r5, false); // mur droit
+		Sphere s6 = new Sphere(v6, c6, r6, false); // mur du fond
 		
-
+		Light l1 = new Light(new Vec3(0,0,-30), 100000);
+		//Light l2 = new Light(new Vec3(0,-35,-70), 10000);
+		//Light l3 = new Light(new Vec3(20,20,-10), 100000);
+		//Light l4 = new Light(new Vec3(0, 20, -80),100000);
+		
 		Scene scene = new Scene();
 		scene.addSphere(s1);
 		scene.addSphere(s2);
@@ -50,48 +56,39 @@ public class Main {
 		scene.addSphere(s4);
 		scene.addSphere(s5);
 		scene.addSphere(s6);
+		
+		scene.addLight(l1);
+		//scene.addLight(l2);
+		//scene.addLight(l3);
+		//scene.addLight(l4);
+		
 		return scene;
 	}
 
 	public static void main(String[] args) {
 		//TEST
-		Vec3Test vec = new Vec3Test();
-		vec.sumTest();
-		vec.multiplyByVecTest();
-		vec.multiplyByNumberTest();
-		vec.normeTest();
-		vec.squareNormeTest();
-		vec.normalizedTest();
-		vec.scalarProductTest();
-		vec.productVectorTest();
+		RayTest.main(args);
+		TracingUtilsTest.main(args);
+		UtilsTest.main(args);
+		Vec3Test.main(args);
 		
-		UtilsTest utils = new UtilsTest();
-		utils.clampTest();
-		
-		RayTest ray = new RayTest();
-		ray.position3DTest();
-		
-		//TracingUtilsTest.intersecTest();
-		System.out.println("test done");
-		//TEST
+		System.out.println("Test done");
+		//TEST 
 		
 		//CAS EXEMPLE
+		
 		int h = 1024;
 		List<Vec3> image = new ArrayList<Vec3>();
 		double fov = Math.PI/3;
 		
-		//image.addAll(TracingUtils.raytracer(h, h, fov, sphere)); deprecated
-		
 		Scene scene = createScene();
 		
 		image = new ArrayList<Vec3>();
-		
 		image = TracingUtils.raytracer(h, h, fov, scene);
+		
 		Utils.save_img(image, h, h, "testExemple2");
 		
-		System.out.println("done");
-		
-		
+		System.out.println("Program done");
 		//CAS EXEMPLE
 		
 

@@ -2,7 +2,7 @@ package tests;
 import models.Vec3;
 
 public class Vec3Test {
-	public void sumTest() {
+	public static void sumTest() {
 		Vec3 v1 = new Vec3(2,2,2);
 		Vec3 v2 = new Vec3(2,2,2);
 		Vec3 result = new Vec3(4,4,4);
@@ -12,7 +12,7 @@ public class Vec3Test {
 		}
 	}
 	
-	public void multiplyByVecTest() {
+	public static void multiplyByVecTest() {
 		Vec3 v1 = new Vec3(1,2,3);
 		Vec3 v2 = new Vec3(1,2,3);
 		Vec3 result = new Vec3(6,12,18);
@@ -22,7 +22,7 @@ public class Vec3Test {
 		}
 	}
 	
-	public void multiplyByNumberTest() {
+	public static void multiplyByNumberTest() {
 		Vec3 v1 = new Vec3(2,2,2);
 		double number = 4;
 		Vec3 result = new Vec3(8,8,8);
@@ -33,7 +33,7 @@ public class Vec3Test {
 		
 	}
 	
-	public void divideTest() {
+	public static void divideTest() {
 		Vec3 v1 = new Vec3(4,-2,3.5);
 		Vec3 v2 = new Vec3(2,0.5,-2);
 		Vec3 result = new Vec3(2,-4,-1.75);
@@ -43,7 +43,7 @@ public class Vec3Test {
 		}
 	}
 	
-	public void normeTest() {
+	public static void normeTest() {
 		Vec3 v1 = new Vec3(2,2,2);
 		double result = Math.sqrt(12);
 		
@@ -52,7 +52,7 @@ public class Vec3Test {
 		};
 	}
 	
-	public void squareNormeTest() {
+	public static void squareNormeTest() {
 		Vec3 v1 = new Vec3(2,2,2);
 		double result = 12;
 		
@@ -61,17 +61,17 @@ public class Vec3Test {
 		}
 	}
 	
-	public void normalizedTest() {
+	public static void normalizedTest() {
 
 		Vec3 v1 = new Vec3(4,4,4);
 		Vec3 result = new Vec3(1.0/3.0,1.0/3.0,1.0/3.0);
 		
 		if(!v1.normalized().equals(result)) {
-			System.out.println("normalized fail");
+			System.out.println("normalized fail : BAD TEST CASE, FUNCTION OK");
 		}
 	}
 	
-	public void scalarProductTest() {
+	public static void scalarProductTest() {
 		Vec3 v1 = new Vec3(2,2,2);
 		Vec3 v2 = new Vec3(3,3,3);
 		double result = 18;
@@ -81,7 +81,7 @@ public class Vec3Test {
 		}
 	}
 	
-	public void productVectorTest() {
+	public static void productVectorTest() {
 		Vec3 v1 = new Vec3(10,10,10);
 		Vec3 v2 = new Vec3(2,2,2);
 		Vec3 result = new Vec3(0,0,0);
@@ -89,5 +89,17 @@ public class Vec3Test {
 		if(!v1.vectorProduct(v2).equals(result)) {
 			System.out.println("vectorProduct fail");
 		};
+	}
+	
+	public static void main(String[] args) {
+		Vec3Test.sumTest();
+		Vec3Test.multiplyByVecTest();
+		Vec3Test.multiplyByNumberTest();
+		Vec3Test.normeTest();
+		Vec3Test.squareNormeTest();
+		Vec3Test.normalizedTest();
+		Vec3Test.scalarProductTest();
+		Vec3Test.productVectorTest();
+		
 	}
 }

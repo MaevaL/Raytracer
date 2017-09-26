@@ -1,0 +1,24 @@
+package models;
+
+public class Light {
+	Vec3 position;
+	double power;
+
+	public Light(Vec3 position, double power) {
+		this.position = position;
+		this.power = power;
+	}
+
+	public Vec3 getPosition() {
+		return position;
+	}
+	public void setPosition(Vec3 position) {
+		this.position = position;
+	}
+	public double getPower() {
+		return power;
+	}
+	public void setPower(double power) {
+		this.power = power;
+	}
+}

@@ -1,0 +1,52 @@
+package models;
+
+public class Intersection {
+	private Vec3 intersecPoint = new Vec3(0,0,0);
+	private Vec3 normale = new Vec3(0,0,0);
+	private Double distanceT = 0.0;
+	private Sphere sphere;
+	private Light light;
+
+	
+	
+	public Intersection(Vec3 intersecPoint, Double distanceT, Sphere sphere,Vec3 normale) {
+		this.intersecPoint = intersecPoint;
+		this.distanceT = distanceT;
+		this.sphere = sphere;
+		this.normale = normale;
+
+	}
+
+
+	public Vec3 getIntersecPoint() {
+		return intersecPoint;
+	}
+	
+	public void setIntersecPoint(Vec3 intersecPoint) {
+		this.intersecPoint = intersecPoint;
+	}
+	
+	public Double getDistanceT() {
+		return distanceT;
+	}
+	
+	public void setDistanceT(Double distanceT) {
+		this.distanceT = distanceT;
+	}
+	
+	public Sphere getSphere() {
+		return sphere;
+	}
+	
+	public void setSphere(Sphere sphere) {
+		this.sphere = sphere;
+	}
+	
+	public Vec3 getNormale() {
+		return normale;
+	}
+	
+	public void setNormale(Vec3 normale) {
+		this.normale = normale;
+	}
+}

@@ -1,0 +1,6 @@
+1506417357912	Encapsulate field 'normale'
+1506417363848	Encapsulate field 'paramT'
+1506425578510	Encapsulate field 'light'
+1506428841930	Encapsulate field 'light'
+1506435734041	Rename method 'illumination'
+1506435758738	Extract method 'illumination'

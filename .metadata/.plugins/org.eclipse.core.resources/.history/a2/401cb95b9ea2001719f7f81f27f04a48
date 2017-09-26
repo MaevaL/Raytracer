@@ -1,0 +1,28 @@
+package models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Scene {
+
+	private List<Sphere> spheres = new ArrayList<Sphere>();
+	private List<Light> lights = new ArrayList<Light>();
+	
+	public Scene() {}
+	
+	public List<Light> getLights() {
+		return lights;
+	}
+
+	public void addLight(Light light) {
+		lights.add(light);
+	}
+	
+	public void addSphere(Sphere sphere) {
+		spheres.add(sphere);
+	}
+	
+	public List<Sphere> getSpheres() {
+		return spheres;
+	}	
+}
