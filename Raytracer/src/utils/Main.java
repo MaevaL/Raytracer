@@ -23,7 +23,7 @@ public class Main {
 		Vec3 v5 = new Vec3(cadre +20, 0, 0); 
 		Vec3 v6 = new Vec3(0, 0, -cadre - 100);
 
-		double r1 = 15;
+		double r1 = 5;
 		double r3 = 2000;
 		double r4 = 2000;
 		double r5 = 2000;
@@ -43,8 +43,9 @@ public class Main {
 		Sphere s4 = new Sphere(v4, c4, r4, false); // mur gauche 
 		Sphere s5 = new Sphere(v5, c5, r5, false); // mur droit
 		Sphere s6 = new Sphere(v6, c6, r6, false); // mur du fond
+		Sphere s7 = new Sphere(new Vec3(0,-20,-60), new Vec3(255,255,255), 5, false);
 		
-		Light l1 = new Light(new Vec3(0,0,-10), 100000);
+		Light l1 = new Light(new Vec3(0,-20,-80), 100000);
 		Light l2 = new Light(new Vec3(30,-30,-30), 100000);
 		Light l3 = new Light(new Vec3(20,20,-30), 100000);
 		Light l4 = new Light(new Vec3(30, 30, 30),100000);
@@ -56,6 +57,7 @@ public class Main {
 		scene.addSphere(s4);
 		scene.addSphere(s5);
 		scene.addSphere(s6);
+		//scene.addSphere(s7);
 		
 		scene.addLight(l1);
 		scene.addLight(l2);
@@ -67,12 +69,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		//TEST
-		RayTest.main(args);
-		TracingUtilsTest.main(args);
-		UtilsTest.main(args);
-		Vec3Test.main(args);
-		
-		System.out.println("Test done");
+//		RayTest.main(args);
+//		TracingUtilsTest.main(args);
+//		UtilsTest.main(args);
+//		Vec3Test.main(args);
+//		
+//		System.out.println("Test done");
 		
 		//TEST 
 		
@@ -87,7 +89,7 @@ public class Main {
 		image = new ArrayList<Vec3>();
 		image = TracingUtils.raytracer(h, h, fov, scene);
 		
-		Utils.save_img(image, h, h, "testExemple2");
+		Utils.save_img(image, h, h, "testLightShadow");
 		
 		System.out.println("Program done");
 		//CAS EXEMPLE

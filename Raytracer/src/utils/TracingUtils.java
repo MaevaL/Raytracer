@@ -16,7 +16,7 @@ public class TracingUtils {
 		double b = 2.0 * (ray.getDirection().scalarProduct(ray.getOrigine().substract(sphere.getOrigin())));
 		double c = (ray.getOrigine().substract(sphere.getOrigin()).squareNorme()) - (sphere.getRaySphere()*sphere.getRaySphere());
 		double delta = (b*b) - (4.0 * c);
-		if (delta > 0) {
+		if (delta >= 0) {
 			double x1 = -(ray.getDirection().scalarProduct(ray.getOrigine().substract(sphere.getOrigin()))) + (Math.sqrt(delta) / 2.0);
 			double x2 = -(ray.getDirection().scalarProduct(ray.getOrigine().substract(sphere.getOrigin()))) - (Math.sqrt(delta) / 2.0);
 
@@ -30,9 +30,6 @@ public class TracingUtils {
 			{
 				return x2;
 			}
-		}
-		else if (delta == 0) {
-			return -(ray.getDirection().scalarProduct(ray.getOrigine().substract(sphere.getOrigin())));
 		}
 		else {
 			return null;
@@ -57,8 +54,7 @@ public class TracingUtils {
 				
 				Ray r = new Ray(origin, direction);
 				
-				color = castRay(r, scene); 
-				
+				color = castRay(r, scene);
 				if(color == null){
 					Vec3 pixel = new Vec3(0,0,0);
 					pixels.set((i*width) + j, pixel);
@@ -69,6 +65,7 @@ public class TracingUtils {
 				}
 			}
 		}
+		
 		return pixels;
 	}
 
@@ -80,7 +77,7 @@ public class TracingUtils {
 		}
 		
 		if(!inter.getSphere().getIs_mirror()) {
-			return inter.getSphere().getColor().divide(new Vec3(255,255,255)).multiplyByNumber(illuminationAll(r, inter, scene.getLights()));
+			return inter.getSphere().getColor().divide(new Vec3(255,255,255)).multiplyByNumber(illuminationAll(r, inter, scene));
 		}
 		else {
 			Ray reflectedRay = reflection(r, inter);
@@ -102,10 +99,11 @@ public class TracingUtils {
 		return newRay;
 	}
 	
-	public static double illuminationAll(Ray r, Intersection inter, List<Light> lights) {
+	public static double illuminationAll(Ray r, Intersection inter, Scene scene) {
 		double sumlight = 0;
-		for (Light light : lights) {
-			sumlight += illumination(r, inter, light);
+		for (Light light : scene.getLights()) {
+			if(!is_in_shadow(inter, light, scene))
+				sumlight += illumination(r, inter, light);
 		}
 		return sumlight;
 	}
@@ -147,5 +145,23 @@ public class TracingUtils {
 		}
 		return null;
 	}	
+	
+	public static Boolean is_in_shadow(Intersection inter, Light light, Scene scene) {
+		Vec3 dirInterLight = light.getPosition().substract(inter.getIntersecPoint()).normalized();
+		double distInterLight = (light.getPosition().substract(inter.getIntersecPoint())).squareNorme();
+
+		Ray r = new Ray(inter.getIntersecPoint().sum(inter.getNormale().multiplyByNumber(0.0001)),dirInterLight);
+		Intersection newInter = intersecScene(scene, r);
+		
+		if(newInter != null) {
+			double distInterInterLight = (inter.getIntersecPoint().substract(newInter.getIntersecPoint())).squareNorme();
+		
+	
+			if(distInterInterLight < distInterLight) {
+				return true;
+			}	
+		}
+		return false;
+	}
 	
 }
