@@ -44,10 +44,10 @@ public class Main {
 		Sphere s5 = new Sphere(v5, c5, r5, false); // mur droit
 		Sphere s6 = new Sphere(v6, c6, r6, false); // mur du fond
 		
-		Light l1 = new Light(new Vec3(0,0,-30), 100000);
-		//Light l2 = new Light(new Vec3(0,-35,-70), 10000);
-		//Light l3 = new Light(new Vec3(20,20,-10), 100000);
-		//Light l4 = new Light(new Vec3(0, 20, -80),100000);
+		Light l1 = new Light(new Vec3(0,0,-10), 100000);
+		Light l2 = new Light(new Vec3(30,-30,-30), 100000);
+		Light l3 = new Light(new Vec3(20,20,-30), 100000);
+		Light l4 = new Light(new Vec3(30, 30, 30),100000);
 		
 		Scene scene = new Scene();
 		scene.addSphere(s1);
@@ -58,9 +58,9 @@ public class Main {
 		scene.addSphere(s6);
 		
 		scene.addLight(l1);
-		//scene.addLight(l2);
-		//scene.addLight(l3);
-		//scene.addLight(l4);
+		scene.addLight(l2);
+		scene.addLight(l3);
+		scene.addLight(l4);
 		
 		return scene;
 	}
@@ -73,6 +73,7 @@ public class Main {
 		Vec3Test.main(args);
 		
 		System.out.println("Test done");
+		
 		//TEST 
 		
 		//CAS EXEMPLE

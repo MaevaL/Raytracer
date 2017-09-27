@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="tests.TracingUtilsTest"/>
-<fullyQualifiedTypeName name="models.Light"/>
 <fullyQualifiedTypeName name="models.Vec3"/>
+<fullyQualifiedTypeName name="models.Ray"/>
+<fullyQualifiedTypeName name="javax.xml.bind.annotation.adapters.NormalizedStringAdapter"/>
+<fullyQualifiedTypeName name="models.Light"/>
+<fullyQualifiedTypeName name="tests.TracingUtilsTest"/>
 </qualifiedTypeNameHistroy>

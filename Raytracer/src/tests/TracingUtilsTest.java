@@ -1,6 +1,7 @@
 package tests;
 
 import models.Intersection;
+import models.Light;
 import models.Ray;
 import models.Scene;
 import models.Sphere;
@@ -108,9 +109,29 @@ public class TracingUtilsTest {
 		}	
 	}
 	
+	public static void is_in_shadowTest() {
+		Sphere sphere = new Sphere(new Vec3(6,0,0), new Vec3(0,0,0), 1, false);
+		Sphere sphere2 = new Sphere(new Vec3(8,0,0), new Vec3(0,0,0), 1, false);
+		Light light = new Light(new Vec3(10,0,0), 10000);
+		
+		Vec3 direction = new Vec3(1,0,0);
+		Ray r = new Ray(new Vec3(0,0,0), direction);
+		
+		Scene scene = new Scene();
+		scene.addSphere(sphere);
+		scene.addSphere(sphere2);
+		scene.addLight(light);
+		
+		Intersection inter = TracingUtils.intersecScene(scene, r);
+		
+		//Boolean b = TracingUtils.is_in_shadow(inter, light, scene);
+		//System.out.println(b + "valeur true");
+	}
+	
 	public static void main(String[] args) {
 		intersecTest();
 		intersecSceneTest();
+		//is_in_shadowTest();
 		
 		
 	}

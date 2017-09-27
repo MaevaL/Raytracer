@@ -5,7 +5,6 @@ public class Intersection {
 	private Vec3 normale = new Vec3(0,0,0);
 	private Double distanceT = 0.0;
 	private Sphere sphere;
-	private Light light;
 
 	
 	
