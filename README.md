@@ -1,5 +1,5 @@
 # Raytracer
-![LightShadowMirrors](https://github.com/MaevaL/Raytracer/blob/master/Raytracer/img/LightShadowtwoMirror.png)
+![LightShadowMirrors](https://github.com/MaevaL/Raytracer/blob/master/Raytracer/img/testLightShadowtwoMirror500.png)
 
 This image show you a render with four spotlight, drop shadow and two mirrors.
 
