@@ -6,7 +6,7 @@ This image show you a render with four spotlight, drop shadow and two mirrors.
 ## Implementations 
 
 I have implemented  : 
-* diffuse lights,
+* diffuse lights
 * multi mirroring 
 * drop shadow 
 
