@@ -1,6 +1,7 @@
 package tests;
 import models.Vec3;
 
+//Testing vector operations
 public class Vec3Test {
 	public static void sumTest() {
 		Vec3 v1 = new Vec3(2,2,2);

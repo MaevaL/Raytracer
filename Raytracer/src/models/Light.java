@@ -1,5 +1,10 @@
 package models;
 
+/**
+ * Light object containing all infos
+ * @author Maeva
+ *
+ */
 public class Light {
 	Vec3 position;
 	double intensity;

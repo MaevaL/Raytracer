@@ -7,6 +7,11 @@ import java.util.List;
 
 import models.Vec3;
 
+/**
+ * Utils class to save an image of the rendered scene
+ * @author Maeva
+ *
+ */
 public class Utils {
 
 	public static double clamp(double value) {	

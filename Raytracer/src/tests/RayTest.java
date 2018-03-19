@@ -3,6 +3,7 @@ package tests;
 import models.Ray;
 import models.Vec3;
 
+// Test the position returned by position3D()
 public class RayTest {
 
 	public static void position3DTest() {
@@ -12,7 +13,7 @@ public class RayTest {
 		
 		Ray r = new Ray(origin, direction);
 		if(!r.position3D(2).equals(result)) {
-			System.out.println("position3D renvoit la mauvaise position");
+			System.out.println("position3D is wrong !");
 		}	
 	}
 	

@@ -12,6 +12,12 @@ import models.Vec3;
 
 public class TracingUtils {
 
+	/**
+	 * 
+	 * @param ray
+	 * @param sphere
+	 * @return intersection point between a ray and a sphere.
+	 */
 	public static Double intersec(Ray ray, Sphere sphere) {
 		double b = 2.0 * (ray.getDirection().scalarProduct(ray.getOrigine().substract(sphere.getOrigin())));
 		double c = (ray.getOrigine().substract(sphere.getOrigin()).squareNorme()) - (sphere.getRaySphere()*sphere.getRaySphere());
@@ -36,6 +42,14 @@ public class TracingUtils {
 		}
 	}
 	
+	/**
+	 * Iterate over all pixels and cast a ray for each of them.
+	 * @param height number of pixels in Y axes
+	 * @param width number of pixels in X axes
+	 * @param fov field of view
+	 * @param scene rendered scene
+	 * @return pixels matrix with Vector3 to encode color
+	 */
 	public static List<Vec3> raytracer(int height, int width, double fov, Scene scene){
 		List<Vec3> pixels = new ArrayList<Vec3>(height * width);
 		for (int i = 0; i < height; i++){
@@ -69,16 +83,26 @@ public class TracingUtils {
 		return pixels;
 	}
 
+	/**
+	 * Recursive cast of a specific ray across the scene in order to compute the color of the pixels
+	 * @param r
+	 * @param scene
+	 * @return color 
+	 */
+	
 	private static Vec3 castRay(Ray r, Scene scene) {
 		Intersection inter = intersecScene(scene, r);
 		Vec3 color = null;
+		// if null the ray cross nothing
 		if(inter == null) {
 			return null;
 		}
 		
+		// diffuse case
 		if(!inter.getSphere().getIs_mirror()) {
-			return inter.getSphere().getColor().divide(new Vec3(255,255,255)).multiplyByNumber(illuminationAll(r, inter, scene));
+			return inter.getSphere().getColor().divide(new Vec3(255,255,255)).multiplyByNumber(illuminationAll(inter, scene));
 		}
+		// mirror case
 		else {
 			Ray reflectedRay = reflection(r, inter);
 			color = castRay(reflectedRay, scene);
@@ -86,11 +110,17 @@ public class TracingUtils {
 				return null;
 			}
 			else {
-				return color.multiplyByNumber(0.9);
+				return color.multiplyByNumber(0.9); // simulate attenuation of intensity through a mirror 
 			}
 		}	
 	}
 	
+	/**
+	 * Compute the reflected ray given incident ray and the informations about intersection point(normal)
+	 * @param r incident ray
+	 * @param inter intersection infos
+	 * @return reflected ray
+	 */
 	public static Ray reflection(Ray r, Intersection inter) {
 		
 		Vec3 reflectedRayDirection = inter.getNormale().multiplyByNumber(inter.getNormale().scalarProduct(r.getDirection())).multiplyByNumber(-2).sum(r.getDirection());
@@ -99,16 +129,30 @@ public class TracingUtils {
 		return newRay;
 	}
 	
-	public static double illuminationAll(Ray r, Intersection inter, Scene scene) {
+	/**
+	 * Compute all lighting intensity for a given intersection.
+	 * @param r
+	 * @param inter
+	 * @param scene
+	 * @return lighting intensity at the intersection
+	 */
+	public static double illuminationAll(Intersection inter, Scene scene) {
 		double sumlight = 0;
 		for (Light light : scene.getLights()) {
 			if(!is_in_shadow(inter, light, scene))
-				sumlight += illumination(r, inter, light);
+				sumlight += illumination(inter, light);
 		}
 		return sumlight;
 	}
 
-	private static double illumination(Ray r, Intersection inter, Light light) {
+	/**
+	 * Compute the specific lighting intensity at a given intersection.
+	 * @param r
+	 * @param inter
+	 * @param light
+	 * @return lighting intensity
+	 */
+	private static double illumination(Intersection inter, Light light) {
 		double intensity = light.getIntensity();
 		Vec3 n = inter.getNormale().normalized();
 		
@@ -119,12 +163,19 @@ public class TracingUtils {
 		return (intensity * Math.abs(n.scalarProduct(dirLight))) / (distLightInter);
 	}
 	
+	/**
+	 * Return the nearest intersection of a ray across a scene.
+	 * @param scene
+	 * @param r casted ray
+	 * @return the nearest intersection of a ray across a scene.
+	 */
 	public static Intersection intersecScene(Scene scene, Ray r){
 
 		Double inter = 0.0;
 		Double distanceMin = null;
 		Sphere sphs= null;
 		
+		// iterate over all the spheres and compute the nearest intersection distance and get the corresponding sphere
 		for (Sphere sphere : scene.getSpheres()) {
 			inter = TracingUtils.intersec(r, sphere);
 			if(inter != null) {
@@ -137,6 +188,7 @@ public class TracingUtils {
 				}
 			}
 		}
+		//Compute the normal with the sphere and construct intersection
 		if(distanceMin != null) {
 			
 			Vec3 normale =r.position3D(distanceMin).substract(sphs.getOrigin()).normalized(); 
@@ -146,6 +198,14 @@ public class TracingUtils {
 		return null;
 	}	
 	
+	/**
+	 * Determine with a given intersection if it is lighted or not by a given light.
+	 * Cast ray from the lighting point to the intersection point to determine if there is another intersection in between.
+	 * @param inter
+	 * @param light
+	 * @param scene
+	 * @return true if lighted , false otherwise
+	 */
 	public static Boolean is_in_shadow(Intersection inter, Light light, Scene scene) {
 		Vec3 dirInterLight = light.getPosition().substract(inter.getIntersecPoint()).normalized();
 		double distInterLight = (light.getPosition().substract(inter.getIntersecPoint())).squareNorme();
@@ -155,11 +215,7 @@ public class TracingUtils {
 		
 		if(newInter != null) {
 			double distInterInterLight = (inter.getIntersecPoint().substract(newInter.getIntersecPoint())).squareNorme();
-		
-	
-			if(distInterInterLight < distInterLight) {
-				return true;
-			}	
+			return (distInterInterLight < distInterLight);
 		}
 		return false;
 	}

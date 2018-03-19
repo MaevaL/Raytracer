@@ -1,5 +1,10 @@
 package models;
 
+/**
+ * Ray object containing all infos 
+ * @author Maeva
+ *
+ */
 public class Ray {
 	private Vec3 origine = new Vec3(0,0,0);
 	private Vec3 direction = new Vec3(0,0,0);
@@ -26,6 +31,7 @@ public class Ray {
 		this.direction = direction;
 	}
 	
+	// return a point at a specific distance on the ray
 	public Vec3 position3D(double t) {
 		Vec3 r = origine.sum(direction.multiplyByNumber(t));
 		return r;

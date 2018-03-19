@@ -1,5 +1,10 @@
 package models;
 
+/**
+ * 3 Dimensional Vector Class containing every method useful for its manipulation
+ * @author Maeva
+ *
+ */
 public class Vec3 {  
 	private double x;
 	private double y;

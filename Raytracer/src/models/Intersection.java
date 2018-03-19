@@ -1,5 +1,10 @@
 package models;
 
+/**
+ * Intersection object containing all infos
+ * @author Maeva
+ *
+ */
 public class Intersection {
 	private Vec3 intersecPoint = new Vec3(0,0,0);
 	private Vec3 normale = new Vec3(0,0,0);

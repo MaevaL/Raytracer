@@ -1,6 +1,7 @@
 package tests;
 import utils.Utils;
 
+// Test utils methods : out of an image.
 public class UtilsTest {
 	
 	public static void clampTest() {
@@ -13,13 +14,13 @@ public class UtilsTest {
 		double r3 = 255;
 		
 		if(Utils.clamp(val1) != r1) {
-			System.out.println("clamp doit renvoyer la valeur min");
+			System.out.println("clamp should be returning min");
 		}
 		if(Utils.clamp(val2) != r2) {
-			System.out.println("clamp doit renvoyer la valeur");
+			System.out.println("clamp should be returning current value");
 		}
 		if(Utils.clamp(val3) != r3) {
-			System.out.println("clamp doit renvoyer le max");
+			System.out.println("clamp should be returning max");
 		}
 	}
 	

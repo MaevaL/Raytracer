@@ -3,6 +3,11 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Scene object containing all objects of the scene
+ * @author Maeva
+ *
+ */
 public class Scene {
 
 	private List<Sphere> spheres = new ArrayList<Sphere>();

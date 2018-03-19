@@ -37,19 +37,31 @@ public class Main {
 		Vec3 c5 = new Vec3(255, 85, 0);  // orange
 		Vec3 c6 = new Vec3(128, 119, 115); // gris 
 
+		/**
+		 * Sphere of the scene.
+		 * @param : position of the sphere
+		 * @param : color of the sphere
+		 * @param : radius of the sphere
+		 * @param : is a mirror ?
+		 * 
+		 * @return : sphere 
+		 * 
+		 **/
 		Sphere s1 = new Sphere(v1, c1, r1, false); // sphere
 		Sphere s2 = new Sphere(v2, c2, r2, false); // sol
 		Sphere s3 = new Sphere(v3, c3, r3, false); // plafond
-		Sphere s4 = new Sphere(v4, c4, r4, false); // mur gauche 
+		Sphere s4 = new Sphere(v4, c4, r4, true); // mur gauche 
 		Sphere s5 = new Sphere(v5, c5, r5, false); // mur droit
 		Sphere s6 = new Sphere(v6, c6, r6, false); // mur du fond
 		Sphere s7 = new Sphere(new Vec3(0,-20,-60), new Vec3(255,255,255), 5, false);
+
 		
+		// Spotlight of the scene
 		Light l1 = new Light(new Vec3(0,-20,-80), 100000);
 		Light l2 = new Light(new Vec3(30,-30,-30), 100000);
 		Light l3 = new Light(new Vec3(20,20,-30), 100000);
 		Light l4 = new Light(new Vec3(30, 30, 30),100000);
-		
+
 		Scene scene = new Scene();
 		scene.addSphere(s1);
 		scene.addSphere(s2);
@@ -58,44 +70,32 @@ public class Main {
 		scene.addSphere(s5);
 		scene.addSphere(s6);
 		//scene.addSphere(s7);
-		
+
 		scene.addLight(l1);
 		scene.addLight(l2);
 		scene.addLight(l3);
 		scene.addLight(l4);
-		
+
 		return scene;
 	}
 
 	public static void main(String[] args) {
-		//TEST
-//		RayTest.main(args);
-//		TracingUtilsTest.main(args);
-//		UtilsTest.main(args);
-//		Vec3Test.main(args);
-//		
-//		System.out.println("Test done");
-		
-		//TEST 
-		
-		//CAS EXEMPLE
-		
+
 		int h = 1024;
 		List<Vec3> image = new ArrayList<Vec3>();
 		double fov = Math.PI/3;
-		
-		Scene scene = createScene();
-		
+
+		Scene scene = createScene(); // exemple scene
+
+		// rayCast
 		image = new ArrayList<Vec3>();
 		image = TracingUtils.raytracer(h, h, fov, scene);
-		
-		Utils.save_img(image, h, h, "testLightShadow");
-		
-		System.out.println("Program done");
-		//CAS EXEMPLE
-		
 
+		// Save image
+		Utils.save_img(image, h, h, "testLightShadow");
+
+		System.out.println("Program done");
 	}
 
-	
+
 }
